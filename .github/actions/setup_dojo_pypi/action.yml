@@ -1,0 +1,35 @@
+# .github/actions/install-poetry/action.yml
+name: "Dojo PyPi"
+description: "Installs a prod environment of Dojo from PyPi"
+inputs:
+  python-version:
+    description: "Python version to use"
+    required: true
+runs:
+  using: "composite"
+  steps:
+
+    - name: Print Python version
+      shell: bash
+      run: |
+        echo "Input value: ${{ inputs.python-version }}"
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+
+    - name: Install Foundry
+      uses: foundry-rs/foundry-toolchain@v1
+      with:
+        version: nightly-de33b6af53005037b463318d2628b5cfcaf39916 
+
+    - name: Install release-executable
+      shell: bash
+      run: |
+        pip install dojo-compass 
