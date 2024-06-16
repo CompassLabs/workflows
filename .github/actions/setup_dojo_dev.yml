@@ -1,0 +1,41 @@
+# .github/actions/install-poetry/action.yml
+name: "Install a dev environment of Dojo"
+description: "Installs Poetry dependencies on macOS"
+inputs:
+  python-version:
+    description: "Python version to use"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Print Python version
+      run: |
+        echo "Input value: ${{ inputs.python-version }}"
+
+    - name: Set up Python ${{ inputs.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install Foundry
+      uses: foundry-rs/foundry-toolchain@v1
+      with:
+        version: nightly-de33b6af53005037b463318d2628b5cfcaf39916 
+    
+    - name: Install python dependencies on linux
+      if: ${{ runner.os == 'linux' }}
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 - --version 1.4.2
+        poetry install
+        echo "POETRY=poetry" >> $GITHUB_ENV
+
+    - name: Install poetry dependencies on mac
+      if: ${{ runner.os == 'macOS' }}
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 - --version 1.4.2
+        /Users/runner/.local/bin/poetry install
+        echo "POETRY=/Users/runner/.local/bin/poetry" >> $GITHUB_ENV
+
