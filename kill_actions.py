@@ -6,7 +6,6 @@ import argparse
 GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')  # Personal Access Token
 # REPO_OWNER = os.getenv('GITHUB_REPOSITORY_OWNER')  # Repository owner
 # REPO_NAME = os.getenv('GITHUB_REPOSITORY').split('/')[1]  # Repository name
-#GITHUB_TOKEN = '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'
 
 
 def get_running_workflows(repo_owner, repo_name):
