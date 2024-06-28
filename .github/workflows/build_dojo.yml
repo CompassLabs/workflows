@@ -49,7 +49,7 @@ jobs:
     
         - name: Use the Version Variable
           run: |
-            echo "The project version is {{ inputs.tag }}""
+            echo "The project version is ${{ inputs.tag }}""
     
         - name: Install poetry dependencies
           run: |
