@@ -2,9 +2,6 @@
 name: "Notify on Slack on a pull request review."
 description: "TODO"
 inputs:
-  python-version:
-    description: "Python version to use"
-    required: true
   repository:
     description: "Name of the Repo"
     required: true
