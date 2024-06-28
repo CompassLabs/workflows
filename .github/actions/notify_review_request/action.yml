@@ -46,7 +46,6 @@ runs:
     - name: Print variables
       shell: bash
       run: |
-        echo "python-version ${{ inputs.python-version }}"
         echo "repository ${{ inputs.repository }}"
         echo "actor ${{ inputs.actor }}"
         echo "pull_request_url ${{ inputs.pull_request_url }}"
