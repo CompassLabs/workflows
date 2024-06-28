@@ -53,7 +53,7 @@ runs:
         echo "pull_request_title ${{ inputs.pull_request_title }}"
 
     - name: Send notification to Slack
-      shell: zsh
+      shell: bash
       env:
         GITHUB_REPOSITORY: ${{ inputs.repository }}
         GITHUB_ACTOR: ${{ inputs.actor }}
