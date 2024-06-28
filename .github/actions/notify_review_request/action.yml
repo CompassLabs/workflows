@@ -1,6 +1,6 @@
 # .github/actions/install-poetry/action.yml
 name: "Notify on Slack on a pull request review."
-description: "Installs a prod environment of Dojo from PyPi"
+description: "TODO"
 inputs:
   python-version:
     description: "Python version to use"
@@ -80,5 +80,5 @@ runs:
               "footer_icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
             }
           ]
-        }' https://hooks.slack.com/services/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
+        }' https://hooks.slack.com/services/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
 
