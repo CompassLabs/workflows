@@ -80,5 +80,5 @@ runs:
               "footer_icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
             }
           ]
-        }' https://hooks.slack.com/services/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
+        }' https://hooks.slack.com/services/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
 
