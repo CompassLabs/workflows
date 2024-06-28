@@ -32,7 +32,7 @@ runs:
       uses: google-github-actions/get-secretmanager-secrets@v2
       with:
         secrets: |
-          SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL: projects/557429359617/secrets/slack_notify_webhook_url
+          SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL: projects/557429359617/secrets/slack_webhook_notify_review_request_url
     
     - name: Print variables
       shell: bash
