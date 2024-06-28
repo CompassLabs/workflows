@@ -21,30 +21,30 @@ inputs:
     description: "Title of the pull request"
     required: true
 
-permissions:
-  contents: read
-  id-token: write
+# permissions:
+#   contents: read
+#   id-token: write
 
 
 runs:
   using: "composite"
   steps:
 
-    - name: Authenticate to Google Cloud
-      id: auth
-      uses: google-github-actions/auth@v2
-      with:
-        project_id: "dojo-405216"
-        workload_identity_provider: "projects/557429359617/locations/global/workloadIdentityPools/github/providers/dojo-ci"
-        service_account: "github-dojo-ci@dojo-405216.iam.gserviceaccount.com"
+    # - name: Authenticate to Google Cloud
+    #   id: auth
+    #   uses: google-github-actions/auth@v2
+    #   with:
+    #     project_id: "dojo-405216"
+    #     workload_identity_provider: "projects/557429359617/locations/global/workloadIdentityPools/github/providers/dojo-ci"
+    #     service_account: "github-dojo-ci@dojo-405216.iam.gserviceaccount.com"
 
 
-    - name: Retrieve secrets from GCP Secrets Manager
-      id: get-secrets
-      uses: google-github-actions/get-secretmanager-secrets@v2
-      with:
-        secrets: |
-          SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL: projects/557429359617/secrets/slack_webhook_notify_review_request_url
+    # - name: Retrieve secrets from GCP Secrets Manager
+    #   id: get-secrets
+    #   uses: google-github-actions/get-secretmanager-secrets@v2
+    #   with:
+    #     secrets: |
+    #       SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL: projects/557429359617/secrets/slack_webhook_notify_review_request_url
     
     - name: Print variables
       shell: bash
@@ -80,5 +80,5 @@ runs:
               "footer_icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
             }
           ]
-        }' ${{ steps.get-secrets.outputs.SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL }}
+        }' https://hooks.slack.com/services/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
 
