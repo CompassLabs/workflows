@@ -57,7 +57,7 @@ runs:
         echo "pull_request_title ${{ inputs.pull_request_title }}"
 
     - name: Send notification to Slack
-      shell: bash
+      shell: zsh
       env:
         # SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL: ${{ steps.get-secrets.outputs.SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL }}
         GITHUB_REPOSITORY: ${{ inputs.repository }}
@@ -80,5 +80,5 @@ runs:
               "footer_icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
             }
           ]
-        }' https://hooks.slack.com/services/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
+        }' https://hooks.slack.com/services/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
 
