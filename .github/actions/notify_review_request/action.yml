@@ -35,6 +35,7 @@ runs:
           SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL: projects/557429359617/secrets/slack_notify_webhook_url
     
     - name: Print variables
+      shell: bash
       run: |
         echo "python-version ${{ inputs.python-version }}"
         echo "repository ${{ inputs.repository }}"
@@ -44,6 +45,7 @@ runs:
         echo "pull_request_title ${{ inputs.pull_request_title }}"
 
     - name: Send notification to Slack
+      shell: bash
       env:
         # SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL: ${{ steps.get-secrets.outputs.SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL }}
         GITHUB_REPOSITORY: ${{ inputs.repository }}
