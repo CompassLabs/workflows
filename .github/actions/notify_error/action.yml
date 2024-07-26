@@ -1,0 +1,62 @@
+# .github/actions/install-poetry/action.yml
+name: "Notify on Slack on a pull request review."
+description: "TODO"
+inputs:
+  repository:
+    description: "Name of the Repo"
+    required: true
+  message:
+    description: "Message to be published to Slack"
+    required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Authenticate to Google Cloud
+      id: auth
+      uses: google-github-actions/auth@v2
+      with:
+        project_id: "dojo-405216"
+        workload_identity_provider: "projects/557429359617/locations/global/workloadIdentityPools/github/providers/dojo-ci"
+        service_account: "github-dojo-ci@dojo-405216.iam.gserviceaccount.com"
+
+    - name: Retrieve secrets from GCP Secrets Manager
+      id: get-secrets
+      uses: google-github-actions/get-secretmanager-secrets@v2
+      with:
+        secrets: |
+          SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL: projects/557429359617/secrets/slack_webhook_notify_review_request_url
+    
+    - name: Print variables
+      shell: bash
+      run: |
+        echo "repository ${{ inputs.repository }}"
+        echo "message ${{ inputs.message }}"
+
+    - name: Send notification to Slack
+      shell: bash
+      env:
+        GITHUB_REPOSITORY: ${{ inputs.repository }}
+        MESSAGE: ${{ inputs.message }}
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{
+          "text": "Error message in ${{ env.GITHUB_REPOSITORY }}",
+          "attachments": [
+            {
+              "color": "#F44336",
+              "fallback": "Error message in ${{ env.GITHUB_REPOSITORY }}: ${{ env.MESSAGE }}",
+              "pretext": "Error message in ${{ env.GITHUB_REPOSITORY }}",
+              "title": "${{ env.MESSAGE }}",
+              "text": "Error: ${{ env.MESSAGE }} in repo: ${{ env.GITHUB_REPOSITORY }}",
+              "footer": "GitHub Actions",
+              "footer_icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+            }
+          ]
+        }' ${{ steps.get-secrets.outputs.SLACK_NOTIFYPULLREQUEST_WEBHOOK_URL }}
+
