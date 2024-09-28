@@ -36,7 +36,7 @@ runs:
       shell: bash
       if: ${{ runner.os == 'macOS' }}
       run: |
-        brew install poetry
+        /opt/homebrew/bin/brew install poetry
         /opt/homebrew/bin/poetry lock --no-update
         /opt/homebrew/bin/poetry install
         echo "POETRY=/opt/homebrew/bin/poetry" >> $GITHUB_ENV
