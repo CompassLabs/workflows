@@ -37,6 +37,7 @@ runs:
       if: ${{ runner.os == 'macOS' }}
       run: |
         curl -sSL https://install.python-poetry.org | python3 - --version 1.4.2
+        /Users/runner/.local/bin/poetry lock --no-update
         /Users/runner/.local/bin/poetry install
         echo "POETRY=/Users/runner/.local/bin/poetry" >> $GITHUB_ENV
 
