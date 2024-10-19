@@ -14,10 +14,10 @@ runs:
       run: |
         echo "Input value: ${{ inputs.python-version }}"
 
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python ${{ inputs.python-version }}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ inputs.python-version }}
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
